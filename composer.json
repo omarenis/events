@@ -1,0 +1,20 @@
+{
+    "name": "omarenis/events",
+    "description": "this is a wordpress plugin converted nito composer project to be installed automatically by composer",
+    "type": "library",
+    "require": {
+      "php": ">=8.1",
+        "devgeniem/acf-codifier": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Omarenis\\Events\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "omar triki",
+            "email": "omar.triki@enis.tn"
+        }
+    ]
+}
