@@ -7,8 +7,8 @@ class Event
     public int $id;
     public string $title;
     public string $description;
-    public Date $startDate;
-    public Date $endDate;
+    public string $startDate;
+    public string $endDate;
     public string $location;
     public string $url;
 

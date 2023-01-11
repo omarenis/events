@@ -15,20 +15,20 @@ declare(strict_types=1);
 namespace Events;
 
 
+use InvalidArgumentException;
 use Omarenis\Events\Fields;
 use Exception;
 use Geniem\ACF\Exception as ExceptionAlias;
 use Geniem\ACF\Group;
 use RuntimeException;
-
+require 'vendor/autoload.php';
 /**
  * @throws Exception
  */
 function loadDatabase(): void
 {
-
-    $wpdb = $GLOBALS['wpdb'];
-    $sql = "
+	$wpdb = $GLOBALS['wpdb'];
+	$sql = "
 CREATE TABLE IF NOT EXISTS events_plugin_events (
     id INTEGER PRIMARY KEY auto_increment,
     title  TEXT,
@@ -38,27 +38,23 @@ CREATE TABLE IF NOT EXISTS events_plugin_events (
     datetime_end DATETIME
 );
 ";
-    if (!$wpdb->query($sql)) {
-        throw new RuntimeException("database creation error");
-    }
+	if (!$wpdb->query($sql)) {
+		throw new InvalidArgumentException("database creation error");
+	}
 }
 
-register_activation_hook(__FILE__, 'Events\loadDatabase');
+register_activation_hook(__FILE__, 'loadDatabase');
 
 try {
-    $fields = new Fields();
-    var_dump($fields);
-    $formGroup = new Group('Events form');
-    $formGroup->set_key('Event form');
-    $formGroup->set_title('Event form for crud');
-    $title = $fields->createTextField("title", "title", "title", "type title here");
-    $description = $fields->createTextField(
-        "description",
-        "description",
-        "description",
-        "type your description here",
-        "TextArea"
-    );
-    $formGroup->add_field($title);
-    $formGroup->add_field($description);
-} catch (ExceptionAlias $e) {}
+	$fields = new Fields();
+	var_dump($fields);
+	$formGroup = new Group('Events form');
+	$formGroup->set_key('Event form');
+	$formGroup->set_title('Event form for crud');
+	$title = $fields->createTextField("title", "title", "title", "type title here");
+	$description = $fields->createTextField("description", "description", "description", "type your description here", "TextArea");
+	$formGroup->add_field($title);
+	$formGroup->add_field($description);
+} catch (ExceptionAlias $e) {
+	var_dump($e);
+}
