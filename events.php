@@ -21,7 +21,7 @@ use Exception;
 use Geniem\ACF\Exception as ExceptionAlias;
 use Geniem\ACF\Group;
 use RuntimeException;
-require 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
 /**
  * @throws Exception
  */
